@@ -6,7 +6,7 @@ echo "INSTALL AND CONFIGURE MYSQL ON CONTROLLER NODE STARTED"
 sleep 2
 Mysql_config(){
 PKG_FAILED=0
-apt install mariadb-server python-pymysql -y || PKG_FAILED=1
+apt install mariadb-server python3-pymysql -y || PKG_FAILED=1
 		if [ $PKG_FAILED -gt 0 ];then
 			echo -e "\e[31m\n$1 PACKAGE INSTALLATION FAILED, EXITING THE SCRIPT [ INSTALLATION FAILED ] \e[0m\n"
 			exit

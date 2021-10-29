@@ -8,7 +8,7 @@ generic_pkg(){
 	##Installing packages on Cotroller node.
 	
 	expect -c '
-	spawn add-apt-repository cloud-archive:stein
+	spawn add-apt-repository cloud-archive:victoria
 	expect "Press * to continue*"
 	send "\r"
 	interact'
@@ -35,7 +35,7 @@ generic_pkg(){
 		echo "ssh to $i"
 		ssh root@$i << EOF
 	expect -c '
-	spawn add-apt-repository cloud-archive:stein
+	spawn add-apt-repository cloud-archive:victoria
 	expect "*to continue*"
 	send "\r"
 	sleep 5

@@ -90,22 +90,22 @@ glance_config(){
 	sleep 5
 
 
-	filepath2='/etc/glance/glance-registry.conf'
+#	filepath2='/etc/glance/glance-registry.conf'
 # Backup the original .conf file
-	cp $filepath2 ${filepath2}.bakup
+#	cp $filepath2 ${filepath2}.bakup
 	
-	echo ".....Configuration on $filepath2....."
+#	echo ".....Configuration on $filepath2....."
 
-	grep -q "^connection = mysql+pymysql" $filepath2 || sed -i '/^\[database\]/ a connection = mysql+pymysql://glance:'$COMMON_PASS'@controller/glance' $filepath2
+#	grep -q "^connection = mysql+pymysql" $filepath2 || sed -i '/^\[database\]/ a connection = mysql+pymysql://glance:'$COMMON_PASS'@controller/glance' $filepath2
 	
-	grep -q "^www_authenticate_uri = http://controller:5000" $filepath2 || \
-	sed -i '/^\[keystone_authtoken\]/ a www_authenticate_uri = http://controller:5000\nauth_url = http://controller:5000\nmemcached_servers = controller:11211\nauth_type = password\nproject_domain_name = Default\nuser_domain_name = Default\nproject_name = service\nusername = glance\npassword = '$COMMON_PASS'' $filepath2
+#	grep -q "^www_authenticate_uri = http://controller:5000" $filepath2 || \
+#	sed -i '/^\[keystone_authtoken\]/ a www_authenticate_uri = http://controller:5000\nauth_url = http://controller:5000\nmemcached_servers = controller:11211\nauth_type = password\nproject_domain_name = Default\nuser_domain_name = Default\nproject_name = service\nusername = glance\npassword = '$COMMON_PASS'' $filepath2
 	
-	grep -q "^flavor = keystone" $filepath2 || \
-	sed -i '/^\[paste_deploy\]/ a flavor = keystone' $filepath2
+#	grep -q "^flavor = keystone" $filepath2 || \
+#	sed -i '/^\[paste_deploy\]/ a flavor = keystone' $filepath2
 	
-	echo "POPULATE THE IMAGE SERVICE DATABASE"
-	echo -e "\n\e[36m[ GLANCE ] :\e[0m DB_SYNC and SERVICE START"
+#	echo "POPULATE THE IMAGE SERVICE DATABASE"
+#	echo -e "\n\e[36m[ GLANCE ] :\e[0m DB_SYNC and SERVICE START"
 
 	# Sync the Database
 	echo "su -s /bin/sh -c "glance-manage db_sync" glance"
@@ -122,6 +122,8 @@ glance_config(){
 	echo "sudo service glance-api restart"
 	sudo service glance-api restart
 	sleep 10
+
+###### VERIFY OPERAETION ################
 
 	source ./admin-openrc
 	echo "$OS_PROJECT_DOMAIN_NAME"
@@ -141,19 +143,19 @@ glance_config(){
 	fi
 	sleep 10
 	#Upload the image to the image serive
-	if openstack image list | grep cirros;then
+	if glance image-list | grep cirros;then
 		echo "Image Already Exist!!!"
 	else
-		echo "openstack image create "cirros" --file cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare --public"
-		openstack image create "cirros" --file cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare --public
+		echo "glance image-create --name "cirros" --file cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare --visibility=public"
+		glance image-create --name "cirros" --file cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare --visibility=public
 		sleep 5
 	fi
 	sleep 2
 
-	echo "openstack image list"
-	openstack image list
+	echo "glance image-list"
+	glance image-list
 	sleep 2
-	check_service=`openstack image list | grep cirros | grep active`
+	check_service=`glance image-list | grep cirros | grep active`
 	if [ ! -z "$check_service" ];then
 		echo -e "\n\n\n\e[36m[IMAGE SERVICE HAS BEEN INSTALLED SUCCESSFULLLY ] \e[0m\n\n\n"
 	else

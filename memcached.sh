@@ -6,7 +6,7 @@ echo "INSTALLING MEMCACHED"
 
 Memcached_config(){
 	PKG_FAILED=0
-    apt install memcached python-memcache -y || PKG_FAILED=1
+    apt install memcached python3-memcache -y || PKG_FAILED=1
 		if [ $PKG_FAILED -gt 0 ];then
 			echo -e "\e[31m\n$1 PACKAGE INSTALLATION FAILED, EXITING THE SCRIPT [ INSTALLATION FAILED ] \e[0m\n"
 			exit
