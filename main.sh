@@ -185,16 +185,16 @@ source /root/autovm/memcached.sh
 source /root/autovm/etcd.sh
 
 # Services
-source /root/autovm/keystone.sh
-source /root/autovm/glance.sh
-source /root/autovm/placement.sh
+#source /root/autovm/keystone.sh
+#source /root/autovm/glance.sh
+#source /root/autovm/placement.sh
 
 # TODO
 #source /root/autovm/dashboard.sh
 
 # TODO
 #source /root/autovm/compute.sh
-source /root/autovm/neutron.sh
+#source /root/autovm/neutron.sh
 
 }
 
