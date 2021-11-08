@@ -157,7 +157,7 @@ PKG_FAILED=0
 	############[ CONFIGURE THE COMPUTE SEVICE TO USE THE NETWORKING ]######
 	echo "--Configure the Compute Service to use the Networking---"
 	
-	sed -i '/^\[neutron\]/ a url = http://controller:9696\nauth_url = http://controller:5000\nauth_type = password\nproject_domain_name = default\nuser_domain_name = default\nregion_name = RegionOne\nproject_name = service\nusername = neutron\npassword = '$COMMON_PASS'\nservice_metadata_proxy = true\nmetadata_proxy_shared_secret = '$ADMIN_TOKEN'' /etc/nova/nova.conf
+	#sed -i '/^\[neutron\]/ a auth_url = http://controller:5000\nauth_type = password\nproject_domain_name = default\nuser_domain_name = default\nregion_name = RegionOne\nproject_name = service\nusername = neutron\npassword = '$COMMON_PASS'\nservice_metadata_proxy = true\nmetadata_proxy_shared_secret = '$ADMIN_TOKEN'' /etc/nova/nova.conf
 
 
 	sleep 2
@@ -240,7 +240,7 @@ echo "---Configuration of Neutron Service on Compute Node Started......."
 	
 	sleep 2
 	echo "------Configure Neutron ON Compute Service----"
-	sed -i '/^\[neutron\]/ a url = http://controller:9696\nauth_url = http://controller:5000\nauth_type = password\nproject_domain_name = default\nuser_domain_name = default\nregion_name = RegionOne\nproject_name = service\nusername = neutron\npassword = '$COMMON_PASS'' $filepath3
+	#sed -i '/^\[neutron\]/ a auth_url = http://controller:5000\nauth_type = password\nproject_domain_name = default\nuser_domain_name = default\nregion_name = RegionOne\nproject_name = service\nusername = neutron\npassword = '$COMMON_PASS'' $filepath3
 	sleep 2
 	
 	echo "--Verify kernal supports Network Bridges---"
