@@ -19,8 +19,7 @@ AUTO_DISCOVER_STATIC_FILES = True
 # A list of js files to be included in the compressed set of files
 ADD_JS_FILES = []
 
-# A list of scss files to be included in the compressed set of files
-ADD_SCSS_FILES = ['dashboard/identity/myplugin/mypanel/mypanel.scss']
+
 
 # A list of template-based views to be added to the header
 ADD_HEADER_SECTIONS = ['myplugin.content.mypanel.views.HeaderView',]
