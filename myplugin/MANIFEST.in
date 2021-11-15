@@ -1,3 +1,3 @@
 include setup.py
 
-recursive-include myplugin *.js *.html
+recursive-include myplugin *.html

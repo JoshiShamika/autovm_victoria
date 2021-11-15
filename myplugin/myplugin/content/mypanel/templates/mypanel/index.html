@@ -7,6 +7,6 @@
 {% endblock page_header %}
 
 {% block main %}
-  <ng-include src="'{{ STATIC_URL }}dashboard/identity/myplugin/mypanel/mypanel.html'">
-  </ng-include>
+  <iframe src="{{ STATIC_URL }}dashboard/identity/myplugin/mypanel/mypanel.html">
+  </iframe>
 {% endblock %}
