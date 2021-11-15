@@ -1,5 +1,14 @@
-
-<div ng-controller="static.dashboard.identity.myPluginController as ctrl">
+<script type="text/javascript">
+function myPluginController($http) {
+    var ctrl = this;
+    ctrl.items = [
+      { name: 'abc', id: 123 },
+      { name: 'efg', id: 345 },
+      { name: 'hij', id: 678 }
+    ];
+  }
+</script>
+<div ng-controller="myPluginController as ctrl">
   <div>Loading data from your controller:</div>
   <ul>
     <li ng-repeat="item in ctrl.items">
