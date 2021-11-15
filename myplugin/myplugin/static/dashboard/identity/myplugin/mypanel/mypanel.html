@@ -1,26 +1,5 @@
-<script>
-    (function() {
-  'use strict';
 
-  angular
-    .module('horizon.dashboard.identity.myplugin.mypanel', [])
-    .controller('horizon.dashboard.identity.myPluginController',
-      myPluginController);
-
-  myPluginController.$inject = [ '$http' ];
-
-  function myPluginController($http) {
-    var ctrl = this;
-    ctrl.items = [
-      { name: 'abc', id: 123 },
-      { name: 'efg', id: 345 },
-      { name: 'hij', id: 678 }
-    ];
-  }
-})();
-</script>
-
-<div ng-controller="horizon.dashboard.identity.myPluginController as ctrl">
+<div ng-controller="static.dashboard.identity.myPluginController as ctrl">
   <div>Loading data from your controller:</div>
   <ul>
     <li ng-repeat="item in ctrl.items">

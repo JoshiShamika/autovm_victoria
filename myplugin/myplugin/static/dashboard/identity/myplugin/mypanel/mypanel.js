@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('horizon.dashboard.identity.myplugin.mypanel', [])
-    .controller('horizon.dashboard.identity.myPluginController',
+    .module('static.dashboard.identity.myplugin.mypanel', [])
+    .controller('static.dashboard.identity.myPluginController',
       myPluginController);
 
   myPluginController.$inject = [ '$http' ];
