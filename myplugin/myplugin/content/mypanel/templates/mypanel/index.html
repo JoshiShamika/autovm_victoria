@@ -8,8 +8,7 @@
 
 
 {% block main %}
-{% for key, value in data.items %}
-    {{ key }}: {{ value }}
-{% endfor %}
-  <p>{{message}}</p>
+Usage statistics for selfservice-instance:
+  <p> cpu usage (in ns) : {{cpu}}</p>
+  <p> memory usage (in MB) : {{memory usage}}</p>
 {% endblock %}
