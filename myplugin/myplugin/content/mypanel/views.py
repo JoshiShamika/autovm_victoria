@@ -5,6 +5,6 @@ class IndexView(generic.TemplateView):
     template_name = 'identity/mypanel/index.html'
     
     def get_context_data(self, *args, **kwargs):
-        context = super(IndexView. self).get_context_data(*args, **kwargs)
-        context['message'] = 'Hello World!'
+        data = {'message': 'Hello Django!'}
+        context = data
         return context

@@ -6,6 +6,10 @@
   {% include "horizon/common/_domain_page_header.html" with title=_("Monitoring") %}
 {% endblock page_header %}
 
+{% for key, value in data.items %}
+    {{ key }}: {{ value }}
+{% endfor %}
+
 {% block main %}
   <p>{{message}}</p>
 {% endblock %}
