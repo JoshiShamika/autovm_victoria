@@ -46,7 +46,7 @@
 	</div>
 	
 	<div class="column" style="float: left">
-		<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+		<canvas id="myChart" style="width:100%;max-width:100%"></canvas>
 	</div>
 </div>
 <script>
@@ -73,8 +73,8 @@ new Chart("myChart", {
   options: {
     legend: {display: false},
     scales: {
-    	yAxes: [{ticks: {display: false}}],
-    	xAxes: [{ticks: {display: false}}],
+    	yAxes: [{ticks: {display: false}, gridLines: {display:false}}],
+    	xAxes: [{ticks: {display: false}, gridLines: {display:false}}],
     }
   }
 });
