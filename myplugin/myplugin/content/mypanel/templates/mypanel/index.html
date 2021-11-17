@@ -8,21 +8,32 @@
 
 
 {% block main %}
-<h2><b>Current usage statistics for selfservice-instance:</b></h2>
+<h2><b>Current Usage Statistics:
+ <br>Instance: selfservice-instance</b></h2>
 <ul>
-  <li> cpu usage (in ns) : {{cpu}}
-  <br> cpu usage (in %) : {{cpuPer}}
+  <li> <b>CPU Usage:</b>
+	<ul>
+		<li>CPU usage (in ns) : {{cpu}}</li>
+		<li>CPU usage (in %) : {{cpuPer}}</li>
+	</ul>
   </li>
-  <li> memory usage (in MB) : {{memory_usage}}
-  <br> Increase/Decrease in memory usage : {{memPer}}
+  <li> <b>Memory Usage:</b>
+	<ul>
+		<li>Memory usage (in MB) : {{memory_usage}}</li>
+		<li>Increase/Decrease in memory usage : {{memPer}}</li>
+	</ul>
   </li>
-  <li> Network Bandwidth:
-  <br> Outgoing Bytes : {{network_outgoing_bytes}}  Incoming Bytes : {{network_incoming_bytes}}
-  <br> Outgoing Packets : {{network_outgoing_packets}}  Incoming Packets : {{network_outgoing_packets}}
+  <li> <b>Network Bandwidth:</b>
+	<ul>
+		<li>Outgoing Bytes : {{network_outgoing_bytes}}  Incoming Bytes : {{network_incoming_bytes}}</li>
+		<li>Outgoing Packets : {{network_outgoing_packets}}  Incoming Packets : {{network_outgoing_packets}}</li>
+	</ul>
   </li>
-  <li> Disk Usage:
-  <br> Disk Write Requests : {{disk_device_write_requests}}  Write Bytes : {{disk_device_write_bytes}}
-  <br> Disk Read Requests : {{disk_device_read_requests}}  Read Bytes : {{disk_device_read_bytes}}
+  <li> <b>Disk Usage:</b>
+	<ul>
+		<li>Disk Write Requests : {{disk_device_write_requests}}  Write Bytes : {{disk_device_write_bytes}}</li>
+		<li>Disk Read Requests : {{disk_device_read_requests}}  Read Bytes : {{disk_device_read_bytes}}</li>
+	</ul>
   </li>
 </ul>  
 {% endblock %}

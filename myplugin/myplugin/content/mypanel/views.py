@@ -44,7 +44,7 @@ class IndexView(generic.TemplateView):
                 key = (json.loads(line)['name']).replace(".", "_")
                 if key not in data.keys():
                     data[key] = json.loads(line)['volume']
-                    date = dateutil.parser.isoparse(json.loads(line)['timestamp'])
+                    
         data['cpuData'] = cpuData
         data['MemoryData'] = MemoryData
         data['time'] = Time
