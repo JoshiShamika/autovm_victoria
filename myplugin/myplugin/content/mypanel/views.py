@@ -6,18 +6,50 @@ class IndexView(generic.TemplateView):
     template_name = 'identity/mypanel/index.html'
     
     def get_context_data(self, *args, **kwargs):
-        data = {
-            'disk.device.write.requests': 783, 
-            'network.outgoing.bytes': 15698, 
-            'network.incoming.packets': 283, 
-            'disk.device.write.bytes': 46624768, 
-            'disk.device.read.requests': 1042, 
-            'memory.usage': 14.546875, 
-            'disk.device.read.bytes': 21754368, 
-            'network.incoming.bytes': 26542, 
-            'cpu': 1665930000000, 
-            'network.outgoing.packets': 152
-        }
-        
+        data = {}
+        data1 = {}
+        MemoryData = []
+        cpuData = []
+        Time = []
+        count = 0
+        timeInt = 300
+        prevCPU = 0
+        prevMem = 0
+        with open('/var/test/ceiltest') as f:
+            lines = f.readlines()
+            for line in lines:
+                key = (json.loads(line)['name']).replace(".", "_")
+                if key == 'memory_usage':
+                    if prevMem == 0:
+                        MemoryData.append(0)
+                    else:
+                        MemoryData.append(round(json.loads(line)['volume'] - prevMem,2))
+                    prevMem = json.loads(line)['volume']
+                if key == 'cpu':
+                    if prevCPU == 0:
+                        cpuData.append(0)
+                    else:
+                        cpuDiff = (json.loads(line)['volume']/10000000)-prevCPU
+                        cpuData.append(round(cpuDiff/timeInt,2))
+                    prevCPU = json.loads(line)['volume']/10000000
+                    Time.append(count)
+                    count = count + 5
+                if key not in data1.keys():
+                    data1[key] = json.loads(line)['volume']
+                    
+                    
+        with open('/var/test/ceiltest') as f:
+            lines = f.readlines()
+            for line in reversed(lines):
+                key = (json.loads(line)['name']).replace(".", "_")
+                if key not in data.keys():
+                    data[key] = json.loads(line)['volume']
+                    date = dateutil.parser.isoparse(json.loads(line)['timestamp'])
+        data['cpuData'] = cpuData
+        data['MemoryData'] = MemoryData
+        data['time'] = Time
+        data['cpuPer'] = cpuData[-1]
+        data['memPer'] = MemoryData[-1]
+
         context = data
         return context

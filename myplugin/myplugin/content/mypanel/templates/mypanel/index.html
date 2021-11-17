@@ -8,7 +8,21 @@
 
 
 {% block main %}
-<h2>Usage statistics for selfservice-instance</h2>
-  <p> cpu usage (in ns) : {{cpu}}</p>
-  <p> memory usage (in MB) : {{memory.usage}}</p>
+<h2><b>Current usage statistics for selfservice-instance:</b></h2>
+<ul>
+  <li> cpu usage (in ns) : {{cpu}}
+  <br> cpu usage (in %) : {{cpuPer}}
+  </li>
+  <li> memory usage (in MB) : {{memory_usage}}
+  <br> Increase/Decrease in memory usage : {{memPer}}
+  </li>
+  <li> Network Bandwidth:
+  <br> Outgoing Bytes : {{network_outgoing_bytes}}  Incoming Bytes : {{network_incoming_bytes}}
+  <br> Outgoing Packets : {{network_outgoing_packets}}  Incoming Packets : {{network_outgoing_packets}}
+  </li>
+  <li> Disk Usage:
+  <br> Disk Write Requests : {{disk_device_write_requests}}  Write Bytes : {{disk_device_write_bytes}}
+  <br> Disk Read Requests : {{disk_device_read_requests}}  Read Bytes : {{disk_device_read_bytes}}
+  </li>
+</ul>  
 {% endblock %}
