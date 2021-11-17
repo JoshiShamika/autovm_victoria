@@ -8,6 +8,7 @@
 
 
 {% block main %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <h2><b>Current Usage Statistics:
  <br>Instance: selfservice-instance</b></h2>
 <ul>
@@ -25,15 +26,46 @@
   </li>
   <li> <b>Network Bandwidth:</b>
 	<ul>
-		<li>Outgoing Bytes : {{network_outgoing_bytes}}  Incoming Bytes : {{network_incoming_bytes}}</li>
-		<li>Outgoing Packets : {{network_outgoing_packets}}  Incoming Packets : {{network_outgoing_packets}}</li>
+		<li>Outgoing Bytes : {{network_outgoing_bytes}}</li>  
+		<li>Outgoing Packets : {{network_outgoing_packets}}</li>  
+		<li>Incoming Bytes : {{network_incoming_bytes}}</li>
+		<li>Incoming Packets : {{network_outgoing_packets}}</li>
 	</ul>
   </li>
   <li> <b>Disk Usage:</b>
 	<ul>
-		<li>Disk Write Requests : {{disk_device_write_requests}}  Write Bytes : {{disk_device_write_bytes}}</li>
-		<li>Disk Read Requests : {{disk_device_read_requests}}  Read Bytes : {{disk_device_read_bytes}}</li>
+		<li>Disk Write Requests : {{disk_device_write_requests}}</li>  
+		<li>Write Bytes : {{disk_device_write_bytes}}</li>
+		<li>Disk Read Requests : {{disk_device_read_requests}}</li>  
+		<li>Read Bytes : {{disk_device_read_bytes}}</li>
 	</ul>
   </li>
 </ul>  
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<script>
+var xValues = {{time}};
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{ 
+      data: {{cpuData}},
+      borderColor: "red",
+      fill: false
+    }, { 
+      data: {{MemoryData}},
+      borderColor: "green",
+      fill: false
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+    	yAxes: [{ticks: {display: false}}],
+    	xAxes: [{ticks: {display: false}}],
+    }
+  }
+});
+</script>
 {% endblock %}
