@@ -9,39 +9,46 @@
 
 {% block main %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<h2><b>Current Usage Statistics:
- <br>Instance: selfservice-instance</b></h2>
-<ul>
-  <li> <b>CPU Usage:</b>
-	<ul>
-		<li>CPU usage (in ns) : {{cpu}}</li>
-		<li>CPU usage (in %) : {{cpuPer}}</li>
-	</ul>
-  </li>
-  <li> <b>Memory Usage:</b>
-	<ul>
-		<li>Memory usage (in MB) : {{memory_usage}}</li>
-		<li>Increase/Decrease in memory usage : {{memPer}}</li>
-	</ul>
-  </li>
-  <li> <b>Network Bandwidth:</b>
-	<ul>
-		<li>Outgoing Bytes : {{network_outgoing_bytes}}</li>  
-		<li>Outgoing Packets : {{network_outgoing_packets}}</li>  
-		<li>Incoming Bytes : {{network_incoming_bytes}}</li>
-		<li>Incoming Packets : {{network_outgoing_packets}}</li>
-	</ul>
-  </li>
-  <li> <b>Disk Usage:</b>
-	<ul>
-		<li>Disk Write Requests : {{disk_device_write_requests}}</li>  
-		<li>Write Bytes : {{disk_device_write_bytes}}</li>
-		<li>Disk Read Requests : {{disk_device_read_requests}}</li>  
-		<li>Read Bytes : {{disk_device_read_bytes}}</li>
-	</ul>
-  </li>
-</ul>  
-<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<h2><b>Current Usage Statistics:</h2>
+ <br>Instance: selfservice-instance</b>
+<div class="row">
+	<div class="column" style="float: left;width: 35%;">
+		<ul>
+		  <li> <b>CPU Usage:</b>
+			<ul>
+				<li>CPU usage (in ns) : {{cpu}}</li>
+				<li>CPU usage (in %) : {{cpuPer}}</li>
+			</ul>
+		  </li>
+		  <li> <b>Memory Usage:</b>
+			<ul>
+				<li>Memory usage (in MB) : {{memory_usage}}</li>
+				<li>Increase/Decrease in memory usage : {{memPer}}</li>
+			</ul>
+		  </li>
+		  <li> <b>Network Bandwidth:</b>
+			<ul>
+				<li>Outgoing Bytes : {{network_outgoing_bytes}}</li>  
+				<li>Outgoing Packets : {{network_outgoing_packets}}</li>  
+				<li>Incoming Bytes : {{network_incoming_bytes}}</li>
+				<li>Incoming Packets : {{network_outgoing_packets}}</li>
+			</ul>
+		  </li>
+		  <li> <b>Disk Usage:</b>
+			<ul>
+				<li>Disk Write Requests : {{disk_device_write_requests}}</li>  
+				<li>Write Bytes : {{disk_device_write_bytes}}</li>
+				<li>Disk Read Requests : {{disk_device_read_requests}}</li>  
+				<li>Read Bytes : {{disk_device_read_bytes}}</li>
+			</ul>
+		  </li>
+		</ul>  
+	</div>
+	
+	<div class="column" style="float: left">
+		<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+	</div>
+</div>
 <script>
 var xValues = {{time}};
 
@@ -52,10 +59,14 @@ new Chart("myChart", {
     datasets: [{ 
       data: {{cpuData}},
       borderColor: "red",
+	  borderWidth: 1,
+      pointRadius: 0,
       fill: false
     }, { 
       data: {{MemoryData}},
       borderColor: "green",
+	  borderWidth: 1,
+      pointRadius: 0,
       fill: false
     }]
   },
