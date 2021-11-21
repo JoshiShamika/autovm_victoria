@@ -50,6 +50,8 @@ class IndexView(generic.TemplateView):
         data['time'] = Time
         data['cpuPer'] = cpuData[-1]
         data['memPer'] = MemoryData[-1]
+        data['min'] = min(cpuData)
+        data['max'] = max(cpuData)
 
         context = data
         return context
