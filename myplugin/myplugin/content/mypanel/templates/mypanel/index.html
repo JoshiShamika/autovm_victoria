@@ -13,84 +13,113 @@
 <script>
     $(document).ready(function() {
         // auto refresh page after 1 second
-        setInterval('refreshPage()', 5000);
+        setInterval('refreshPage()', 7000);
     });
  
     function refreshPage() { 
         location.reload(); 
     }
 </script>
-
-<h2><b>Current Usage Statistics:</h2>
- <br>Instance: selfservice-instance</b>
-<div class="row">
-	<div class="column" style="float: left;width: 30%;">
-		<ul>
-		  <li> <b>CPU Usage:</b>
-			<ul>
-				<li>CPU usage (in ns) : {{cpu}}</li>
-				<li>CPU usage (in %) : {{cpuPer}}</li>
-			</ul>
-		  </li>
-		  <li> <b>Memory Usage:</b>
-			<ul>
-				<li>Memory usage (in MB) : {{memory_usage}}</li>
-				<li>Increase/Decrease in memory usage : {{memPer}}</li>
-			</ul>
-		  </li>
-		  <li> <b>Network Bandwidth:</b>
-			<ul>
-				<li>Outgoing Bytes : {{network_outgoing_bytes}}</li>  
-				<li>Outgoing Packets : {{network_outgoing_packets}}</li>  
-				<li>Incoming Bytes : {{network_incoming_bytes}}</li>
-				<li>Incoming Packets : {{network_outgoing_packets}}</li>
-			</ul>
-		  </li>
-		  <li> <b>Disk Usage:</b>
-			<ul>
-				<li>Disk Write Requests : {{disk_device_write_requests}}</li>  
-				<li>Write Bytes : {{disk_device_write_bytes}}</li>
-				<li>Disk Read Requests : {{disk_device_read_requests}}</li>  
-				<li>Read Bytes : {{disk_device_read_bytes}}</li>
-			</ul>
-		  </li>
-		</ul>  
-	</div>
+<table>
 	
-	<div class="column" style="float: left;text-align:center;padding:30px">
-		<b>CPU utilization and Memory Utilization:</b>
-		<canvas id="myChart" style="padding:10px;width:1000px;max-width:600px"></canvas>
-	</div>
-</div>
-<script>
-var xValues = {{time}};
+	<tr>
+	
+		<td>
+		
+		<h2><b>Current Usage Statistics:</h2>
+		 <br>Instance: {{values.Instance}}</b>
+		<div class="row">
+			<div class="column" style="float: left;width: 30%;">
+				<ul>
+				  <li> <b>CPU Usage:</b>
+					<ul>
+						<li>CPU usage (in ns) : {{values.cpu}}</li>
+						<li>CPU usage (in %) : {{values.cpuPer}}</li>
+					</ul>
+				  </li>
+				  <li> <b>Memory Usage:</b>
+					<ul>
+						<li>Memory usage (in MB) : {{values.memory_usage}}</li>
+						<li>Increase/Decrease in memory usage : {{values.memPer}}</li>
+					</ul>
+				  </li>
+				  <li> <b>Network Bandwidth:</b>
+					<ul>
+						<li>Outgoing Bytes : {{values.network_outgoing_bytes}}</li>  
+						<li>Outgoing Packets : {{values.network_outgoing_packets}}</li>  
+						<li>Incoming Bytes : {{values.network_incoming_bytes}}</li>
+						<li>Incoming Packets : {{values.network_outgoing_packets}}</li>
+					</ul>
+				  </li>
+				  <li> <b>Disk Usage:</b>
+					<ul>
+						<li>Disk Write Requests : {{values.disk_device_write_requests}}</li>  
+						<li>Write Bytes : {{values.disk_device_write_bytes}}</li>
+						<li>Disk Read Requests : {{values.disk_device_read_requests}}</li>  
+						<li>Read Bytes : {{values.disk_device_read_bytes}}</li>
+					</ul>
+				  </li>
+				</ul>  
+			</div>
+			
+			<div class="column" style="float: left;text-align:center;padding:30px">
+				<b>CPU utilization and Memory Utilization:</b>
+				<canvas id="myChart" style="padding:10px;width:1000px;max-width:600px"></canvas>
+			</div>
+		</div>
+		<script>
+		var xValues = {{values.time}};
 
-new Chart("myChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{ 
-	  label: 'CPU Utilization',
-      data: {{cpuData}},
-      borderColor: "red",
-	  borderWidth: 1,
-      pointRadius: 0,
-      fill: false
-    }, { 
-	  label: 'Memory Utilization',
-      data: {{MemoryData}},
-      borderColor: "green",
-	  borderWidth: 1,
-      pointRadius: 0,
-      fill: false
-    }]
-  },
-  options: {
-    scales: {
-    	yAxes: [{ticks: {stepSize: {{max}}-{{min}}, min: {{min}}, max: {{max}}}, gridLines: {display:false}}],
-    	xAxes: [{ticks: {display: false}, gridLines: {display:false}, scaleLabel: {display: true, labelString: 'Data Last updated at: 21:05'}}],
-    }
-  }
-});
-</script>
+		new Chart("myChart", {
+		  type: "line",
+		  data: {
+			labels: xValues,
+			datasets: [{ 
+			  label: 'CPU Utilization',
+			  data: {{values.cpuData}},
+			  borderColor: "red",
+			  borderWidth: 1,
+			  pointRadius: 0,
+			  fill: false
+			}, { 
+			  label: 'Memory Utilization',
+			  data: {{values.MemoryData}},
+			  borderColor: "green",
+			  borderWidth: 1,
+			  pointRadius: 0,
+			  fill: false
+			}]
+		  },
+		  options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						stepSize: {{values.max}}-{{values.min}}, 
+						min: {{values.min}}, 
+						max: {{values.max}}
+						}, 
+					gridLines: {display:false}
+				}],
+				xAxes: [{
+					ticks: {
+						display: false
+						}, 
+					gridLines: {
+						display:false
+						}, 
+					scaleLabel: {
+						display: true, 
+						labelString: 'Data Last updated at: {{values.TimeStamp}}'
+						}
+				}],
+			}
+		  }
+		});
+		</script>
+		</td>
+	</tr>
+	
+</table>
+
+ 
 {% endblock %}

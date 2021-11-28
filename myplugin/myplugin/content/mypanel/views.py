@@ -6,6 +6,7 @@ class IndexView(generic.TemplateView):
     template_name = 'identity/mypanel/index.html'
     
     def get_context_data(self, *args, **kwargs):
+        user = self.request.user.id
         data = {}
         data1 = {}
         MemoryData = []
@@ -41,9 +42,10 @@ class IndexView(generic.TemplateView):
         with open('/var/test/ceiltest') as f:
             lines = f.readlines()
             for line in reversed(lines):
-                key = (json.loads(line)['name']).replace(".", "_")
-                if key not in data.keys():
-                    data[key] = json.loads(line)['volume']
+                if user == json.loads(line)['user_id']:
+                    key = (json.loads(line)['name']).replace(".", "_")
+                    if key not in data.keys():
+                        data[key] = json.loads(line)['volume']
                     
         data['cpuData'] = cpuData
         data['MemoryData'] = MemoryData
