@@ -27,36 +27,36 @@
 		<td>
 		
 		<h2><b>Current Usage Statistics:</h2>
-		 <br>Instance: {{values.Instance}}</b>
+		 <br>Instance: Selfservice</b>
 		<div class="row">
 			<div class="column" style="float: left;width: 30%;">
 				<ul>
 				  <li> <b>CPU Usage:</b>
 					<ul>
-						<li>CPU usage (in ns) : {{values.cpu}}</li>
-						<li>CPU usage (in %) : {{values.cpuPer}}</li>
+						<li>CPU usage (in ns) : {{cpu}}</li>
+						<li>CPU usage (in %) : {{cpuPer}}</li>
 					</ul>
 				  </li>
 				  <li> <b>Memory Usage:</b>
 					<ul>
-						<li>Memory usage (in MB) : {{values.memory_usage}}</li>
-						<li>Increase/Decrease in memory usage : {{values.memPer}}</li>
+						<li>Memory usage (in MB) : {{memory_usage}}</li>
+						<li>Increase/Decrease in memory usage : {{memPer}}</li>
 					</ul>
 				  </li>
 				  <li> <b>Network Bandwidth:</b>
 					<ul>
-						<li>Outgoing Bytes : {{values.network_outgoing_bytes}}</li>  
-						<li>Outgoing Packets : {{values.network_outgoing_packets}}</li>  
-						<li>Incoming Bytes : {{values.network_incoming_bytes}}</li>
-						<li>Incoming Packets : {{values.network_outgoing_packets}}</li>
+						<li>Outgoing Bytes : {{network_outgoing_bytes}}</li>  
+						<li>Outgoing Packets : {{network_outgoing_packets}}</li>  
+						<li>Incoming Bytes : {{network_incoming_bytes}}</li>
+						<li>Incoming Packets : {{network_outgoing_packets}}</li>
 					</ul>
 				  </li>
 				  <li> <b>Disk Usage:</b>
 					<ul>
-						<li>Disk Write Requests : {{values.disk_device_write_requests}}</li>  
-						<li>Write Bytes : {{values.disk_device_write_bytes}}</li>
-						<li>Disk Read Requests : {{values.disk_device_read_requests}}</li>  
-						<li>Read Bytes : {{values.disk_device_read_bytes}}</li>
+						<li>Disk Write Requests : {{disk_device_write_requests}}</li>  
+						<li>Write Bytes : {{disk_device_write_bytes}}</li>
+						<li>Disk Read Requests : {{disk_device_read_requests}}</li>  
+						<li>Read Bytes : {{disk_device_read_bytes}}</li>
 					</ul>
 				  </li>
 				</ul>  
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 		<script>
-		var xValues = {{values.time}};
+		var xValues = {{time}};
 
 		new Chart("myChart", {
 		  type: "line",
@@ -76,14 +76,14 @@
 			labels: xValues,
 			datasets: [{ 
 			  label: 'CPU Utilization',
-			  data: {{values.cpuData}},
+			  data: {{cpuData}},
 			  borderColor: "red",
 			  borderWidth: 1,
 			  pointRadius: 0,
 			  fill: false
 			}, { 
 			  label: 'Memory Utilization',
-			  data: {{values.MemoryData}},
+			  data: {{MemoryData}},
 			  borderColor: "green",
 			  borderWidth: 1,
 			  pointRadius: 0,
@@ -94,9 +94,9 @@
 			scales: {
 				yAxes: [{
 					ticks: {
-						stepSize: {{values.max}}-{{values.min}}, 
-						min: {{values.min}}, 
-						max: {{values.max}}
+						stepSize: {{max}}-{{min}}, 
+						min: {{min}}, 
+						max: {{max}}
 						}, 
 					gridLines: {display:false}
 				}],
