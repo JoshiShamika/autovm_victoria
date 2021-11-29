@@ -46,6 +46,12 @@ class IndexView(generic.TemplateView):
                     key = (json.loads(line)['name']).replace(".", "_")
                     if key not in data.keys():
                         data[key] = json.loads(line)['volume']
+                        if key == 'cpu':
+                            time = json.loads(line)['timestamp']
+                            time = time.split("T")[-1]
+                            hhmm = time.split(":")[0] +":"+ time.split(":")[1]
+                            data['timestamp'] = hhmm
+                            data['instance'] = json.loads(line)['resource_metadata']['display_name']
                     
         data['cpuData'] = cpuData
         data['MemoryData'] = MemoryData
