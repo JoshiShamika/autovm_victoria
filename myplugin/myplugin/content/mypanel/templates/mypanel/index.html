@@ -9,7 +9,13 @@
 
 {% block main %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
+<script type = "text/JavaScript">
+         <!--
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+         //-->
+      </script>
 <script>
     $(document).ready(function() {
         // auto refresh page after 1 second
@@ -21,7 +27,7 @@
     }
 </script>
 <table>
-	
+	<script> AutoRefresh(5000)</script>
 	<tr>
 	
 		<td>
