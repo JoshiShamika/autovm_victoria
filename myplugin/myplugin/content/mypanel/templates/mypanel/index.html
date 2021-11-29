@@ -28,10 +28,11 @@
 </script>
 <table>
 	<script> AutoRefresh(420000)</script>
+	{% for key, val in data.items %}
 	<tr>
 	
 		<td>
-		
+		Testing: <br>{{key}} : {{val}}
 		<h2><b>Current Usage Statistics:</h2>
 		 <br>Instance: {{instance}}</b>
 		<div class="row">
