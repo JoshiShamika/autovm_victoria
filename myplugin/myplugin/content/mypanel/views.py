@@ -61,5 +61,5 @@ class IndexView(generic.TemplateView):
         data['min'] = min(cpuData)
         data['max'] = max(cpuData)
 
-        context['data'] = data
-        return context
+        
+        return {'data':data}
