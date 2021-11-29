@@ -60,6 +60,9 @@ class IndexView(generic.TemplateView):
         data['memPer'] = MemoryData[-1]
         data['min'] = min(cpuData)
         data['max'] = max(cpuData)
+        instanceData = {}
+        instanceData['selfservice-instance'] = data
+        
 
         
-        return {'data':data}
+        return {'data':instanceData}

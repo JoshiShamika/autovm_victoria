@@ -8,8 +8,11 @@
 
 
 {% block main %}
-{% for key in data.items %}
-   <p>{{ data[key] }}</p>
+{% for key,value in data.items %}
+   <p>{{ key }}</p>
+   <br>
+   <p>{{ key.timestamp }}</p>
+   <p>{{ key.cpu }}</p>
 {% endfor %}
  
 {% endblock %}
