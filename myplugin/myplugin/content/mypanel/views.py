@@ -16,6 +16,17 @@ class IndexView(generic.TemplateView):
         timeInt = 300
         prevCPU = 0
         prevMem = 0
+        instance = {}
+        
+        with open('Downloads/ceiltest') as f:
+            lines = f.readlines()
+            for line in lines:
+                if user == json.loads(line)['user_id']:
+                    key1 = (json.loads(line)['resource_metadata']['instance_id'])
+                    if key1 not in instance.keys():
+                        instance[key1] = json.loads(line)['resource_metadata']['display_name']
+        
+        
         with open('/var/test/ceiltest') as f:
             lines = f.readlines()
             for line in lines:
@@ -61,7 +72,10 @@ class IndexView(generic.TemplateView):
         data['min'] = min(cpuData)
         data['max'] = max(cpuData)
         instanceData = {}
-        instanceData['selfservice-instance'] = data
+        
+        for k in instance.keys():
+    
+            instanceData[instance[k]] = data
         
 
         
