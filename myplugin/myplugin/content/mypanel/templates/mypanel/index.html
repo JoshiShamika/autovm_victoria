@@ -8,11 +8,46 @@
 
 
 {% block main %}
-{% for key,value in data.items %}
-   <p>{{ key }}</p>
-   <br>
-   <p>{{ key.timestamp }}</p>
-   <p>{{ key.cpu }}</p>
-{% endfor %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script type = "text/JavaScript">
+         <!--
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+         //-->
+      </script>
+<script>
+    $(document).ready(function() {
+        // auto refresh page after 1 second
+        setInterval('refreshPage()', 7000);
+    });
  
+    function refreshPage() { 
+        location.reload(); 
+    }
+</script>
+<table>
+	<script> AutoRefresh(420000)</script>
+
+
+
+	{% for key,value in data.items %}
+	<tr>
+	
+		<td>
+		<h2><b>Current Usage Statistics:</h2>
+		 <br>Instance: {{value.instance}}</b>
+		 <br>
+	   <p>{{ key }}</p>
+	   <br>
+	   <p>{{ value.timestamp }}</p>
+	   <p>{{ value.cpu }}</p>
+	   
+	   	</td>
+	</tr>
+	{% endfor %}
+	
+	
+ </table>
 {% endblock %}
