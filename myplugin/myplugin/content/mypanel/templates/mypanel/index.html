@@ -39,10 +39,40 @@
 		<h2><b>Current Usage Statistics:</h2>
 		 <br>Instance: {{value.instance}}</b>
 		 <br>
-	   <p>{{ key }}</p>
-	   <br>
-	   <p>{{ value.timestamp }}</p>
-	   <p>{{ value.cpu }}</p>
+	   <div class="row">
+			<div class="column" style="float: left;width: 30%;">
+				<ul>
+				  <li> <b>CPU Usage:</b>
+					<ul>
+						<li>CPU usage (in ns) : {{value.cpu}}</li>
+						<li>CPU usage (in %) : {{value.cpuPer}}</li>
+					</ul>
+				  </li>
+				  <li> <b>Memory Usage:</b>
+					<ul>
+						<li>Memory usage (in MB) : {{value.memory_usage}}</li>
+						<li>Increase/Decrease in memory usage : {{value.memPer}}</li>
+					</ul>
+				  </li>
+				  <li> <b>Network Bandwidth:</b>
+					<ul>
+						<li>Outgoing Bytes : {{value.network_outgoing_bytes}}</li>  
+						<li>Outgoing Packets : {{value.network_outgoing_packets}}</li>  
+						<li>Incoming Bytes : {{value.network_incoming_bytes}}</li>
+						<li>Incoming Packets : {{value.network_outgoing_packets}}</li>
+					</ul>
+				  </li>
+				  <li> <b>Disk Usage:</b>
+					<ul>
+						<li>Disk Write Requests : {{value.disk_device_write_requests}}</li>  
+						<li>Write Bytes : {{value.disk_device_write_bytes}}</li>
+						<li>Disk Read Requests : {{value.disk_device_read_requests}}</li>  
+						<li>Read Bytes : {{value.disk_device_read_bytes}}</li>
+					</ul>
+				  </li>
+				</ul>  
+			</div>
+		
 	   
 	   	</td>
 	</tr>
