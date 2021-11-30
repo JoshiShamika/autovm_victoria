@@ -17,8 +17,9 @@ class IndexView(generic.TemplateView):
         prevCPU = 0
         prevMem = 0
         instance = {}
+        UsageData = {}
         
-        with open('Downloads/ceiltest') as f:
+        with open('/var/test/ceiltest') as f:
             lines = f.readlines()
             for line in lines:
                 if user == json.loads(line)['user_id']:
@@ -29,25 +30,36 @@ class IndexView(generic.TemplateView):
         
         with open('/var/test/ceiltest') as f:
             lines = f.readlines()
-            for line in lines:
-                key = (json.loads(line)['name']).replace(".", "_")
-                if key == 'memory_usage':
-                    if prevMem == 0:
-                        MemoryData.append(0)
-                    else:
-                        MemoryData.append(round(json.loads(line)['volume'] - prevMem,2))
-                    prevMem = json.loads(line)['volume']
-                if key == 'cpu':
-                    if prevCPU == 0:
-                        cpuData.append(0)
-                    else:
-                        cpuDiff = (json.loads(line)['volume']/10000000)-prevCPU
-                        cpuData.append(round(cpuDiff/timeInt,2))
-                    prevCPU = json.loads(line)['volume']/10000000
-                    Time.append(count)
-                    count = count + 5
-                if key not in data1.keys():
-                    data1[key] = json.loads(line)['volume']
+            for k in instance.keys():
+                for line in lines:
+                    if user == json.loads(line)['user_id'] and k == json.loads(line)['resource_metadata']['instance_id']:
+                        key = (json.loads(line)['name']).replace(".", "_")
+                        if key == 'memory_usage':
+                            if prevMem == 0:
+                                MemoryData.append(0)
+                            else:
+                                MemoryData.append(round(json.loads(line)['volume'] - prevMem,2))
+                            prevMem = json.loads(line)['volume']
+                        if key == 'cpu':
+                            if prevCPU == 0:
+                                cpuData.append(0)
+                            else:
+                                cpuDiff = (json.loads(line)['volume']/10000000)-prevCPU
+                                cpuData.append(round(cpuDiff/timeInt,2))
+                            prevCPU = json.loads(line)['volume']/10000000
+                            Time.append(count)
+                            count = count + 5
+                        if key not in data1.keys():
+                            data1[key] = json.loads(line)['volume']
+                UsageData[k] = {
+                    'cpuData' : cpuData, 
+                    'MemoryData': MemoryData, 
+                    'time' : Time, 
+                    'cpuPer' : cpuData[-1],
+                    'memPer' : MemoryData[-1],
+                    'min' : min(cpuData),
+                    'max' : max(cpuData)
+                }            
                     
                     
         with open('/var/test/ceiltest') as f:
@@ -64,18 +76,19 @@ class IndexView(generic.TemplateView):
                             data['timestamp'] = hhmm
                             data['instance'] = json.loads(line)['resource_metadata']['display_name']
                     
-        data['cpuData'] = cpuData
-        data['MemoryData'] = MemoryData
-        data['time'] = Time
-        data['cpuPer'] = cpuData[-1]
-        data['memPer'] = MemoryData[-1]
-        data['min'] = min(cpuData)
-        data['max'] = max(cpuData)
+        #data['cpuData'] = cpuData
+        #data['MemoryData'] = MemoryData
+        #data['time'] = Time
+        #data['cpuPer'] = cpuData[-1]
+        #data['memPer'] = MemoryData[-1]
+        #data['min'] = min(cpuData)
+        #data['max'] = max(cpuData)
         instanceData = {}
         
         for k in instance.keys():
     
             instanceData[instance[k]] = data
+            instanceData[instance[k]].update(UsageData[k])
         
 
         
