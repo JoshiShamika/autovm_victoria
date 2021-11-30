@@ -18,6 +18,7 @@ class IndexView(generic.TemplateView):
         prevMem = 0
         instance = {}
         UsageData = {}
+        UsageVol = {}
         
         with open('/var/test/ceiltest') as f:
             lines = f.readlines()
@@ -64,17 +65,21 @@ class IndexView(generic.TemplateView):
                     
         with open('/var/test/ceiltest') as f:
             lines = f.readlines()
-            for line in reversed(lines):
-                if user == json.loads(line)['user_id']:
-                    key = (json.loads(line)['name']).replace(".", "_")
-                    if key not in data.keys():
-                        data[key] = json.loads(line)['volume']
-                        if key == 'cpu':
-                            time = json.loads(line)['timestamp']
-                            time = time.split("T")[-1]
-                            hhmm = time.split(":")[0] +":"+ time.split(":")[1]
-                            data['timestamp'] = hhmm
-                            data['instance'] = json.loads(line)['resource_metadata']['display_name']
+            for k in instance.keys():
+                for line in reversed(lines):
+                    if user == json.loads(line)['user_id'] and k == json.loads(line)['resource_metadata']['instance_id']:
+                        key = (json.loads(line)['name']).replace(".", "_")
+                        if key not in data.keys():
+                            data[key] = json.loads(line)['volume']
+                            if key == 'cpu':
+                                time = json.loads(line)['timestamp']
+                                time = time.split("T")[-1]
+                                hhmm = time.split(":")[0] +":"+ time.split(":")[1]
+                                data['timestamp'] = hhmm
+                                data['instance'] = json.loads(line)['resource_metadata']['display_name']
+                                
+                UsageVol[k] = data                
+                                
                     
         #data['cpuData'] = cpuData
         #data['MemoryData'] = MemoryData
@@ -87,7 +92,7 @@ class IndexView(generic.TemplateView):
         
         for k in instance.keys():
     
-            instanceData[instance[k]] = data
+            instanceData[instance[k]] = UsageVol[k]
             instanceData[instance[k]].update(UsageData[k])
         
 
